@@ -4,11 +4,26 @@ from rest_framework.response import Response
 from rest_framework import permissions
 from rest_framework.views import APIView
 from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework.pagination import PageNumberPagination
+from rest_framework import generics
 
 from .send_mail import send_confirmation_email
 from . import serializers
 
 User = get_user_model()
+
+class StandartResultPagination(PageNumberPagination):
+    page_size = 2
+    page_query_param = 'page'
+
+
+# class CommentCreateView(generics.CreateAPIView):
+#     queryset = Comment.objects.all()
+#     serializer_class = serializers.CommentSerializer
+#     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+#
+#     def perform_create(self, serializer):
+#         serializer.save(owner=self.request.user)
 
 
 class RegistrationView(APIView):
