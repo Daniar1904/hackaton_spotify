@@ -50,7 +50,8 @@ INSTALLED_APPS = [
 
     # my_aps
     'sounds',
-    'user'
+    'user',
+    'category',
 ]
 
 REST_AUTH_TOKEN_MODEL = None
@@ -141,6 +142,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
 AUTH_USER_MODEL = 'user.CustomUser'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
