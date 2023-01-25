@@ -8,7 +8,7 @@ class SoundListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Sound
-        fields = ('owner', 'singer', 'title', 'image')
+        fields = ('owner_email', 'singer', 'title', 'image', 'category')
 
 
 class SoundSerializer(serializers.ModelSerializer):

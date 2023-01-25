@@ -1,12 +1,12 @@
 from django.urls import path, include
 from . import views
-from rest_framework.routers import DefaultRouter
+from rest_framework.routers import SimpleRouter
 
-router = DefaultRouter()
-router.register('sounds', views.SoundViewSet)
+router = SimpleRouter()
+# router.register('sounds', views.SoundViewSet)
 
 urlpatterns = [
-    path('', include(router.urls)),
+    # path('', include(router.urls)),
     path('comments/', views.CommentCreateView.as_view()),
     path('comments/<int:pk>/', views.CommentDetailView.as_view()),
     path('likes/', views.LikeCreateView.as_view()),

@@ -23,13 +23,14 @@ from rest_framework.routers import SimpleRouter
 
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
-
+from sounds.views import  SoundViewSet
 from category.views import CategoryViewSet
 from sounds.views import SoundViewSet
 
 router = SimpleRouter()
 router.register('categories', CategoryViewSet)
 router.register('sounds', SoundViewSet)
+# router.register('sounds', SoundViewSet)
 
 schema_view = get_schema_view(
    openapi.Info(
