@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth import get_user_model
+from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from rest_framework import permissions
 from rest_framework.views import APIView
@@ -15,15 +16,6 @@ User = get_user_model()
 class StandartResultPagination(PageNumberPagination):
     page_size = 2
     page_query_param = 'page'
-
-
-# class CommentCreateView(generics.CreateAPIView):
-#     queryset = Comment.objects.all()
-#     serializer_class = serializers.CommentSerializer
-#     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-#
-#     def perform_create(self, serializer):
-#         serializer.save(owner=self.request.user)
 
 
 class RegistrationView(APIView):
