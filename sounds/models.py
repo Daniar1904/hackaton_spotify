@@ -1,4 +1,4 @@
-from ckeditor.fields import RichTextField
+# from ckeditor.fields import RichTextField
 from django.contrib.auth import get_user_model
 from django.db import models
 
@@ -8,16 +8,11 @@ User = get_user_model()
 
 
 class Sound(models.Model):
-    # STATUS_CHOICES = (
-    #     ('available', 'Доступно'),
-    #     ('not available', 'Не доступно')
-    # )
 
     owner = models.ForeignKey(User, on_delete=models.RESTRICT, related_name='sounds')
     title = models.CharField(max_length=150)
     category = models.ForeignKey(Genre, related_name='sounds', on_delete=models.RESTRICT)
     image = models.ImageField(upload_to='images')
-    # avail = models.CharField(choices=STATUS_CHOICES, max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
