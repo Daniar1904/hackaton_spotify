@@ -9,8 +9,10 @@ User = get_user_model()
 
 
 class Sound(models.Model):
+    """Подготавливаем модели наших треков"""
     owner = models.ForeignKey(User, on_delete=models.RESTRICT, related_name='sounds')
     title = models.CharField(max_length=150)
+    """В file используем функцию добавления музыкального файла по расширению mp3"""
     file = models.FileField(
         upload_to='songs',
         validators=[FileExtensionValidator(allowed_extensions=['mp3', 'wav'])], blank=True
@@ -25,6 +27,7 @@ class Sound(models.Model):
 
 
 class Comment(models.Model):
+    """Создаем класс для добавления комментариев/отзывов"""
     owner = models.ForeignKey('user.CustomUser', related_name='comments',
                               on_delete=models.CASCADE)
     sound = models.ForeignKey(Sound, related_name='comments',
@@ -37,6 +40,7 @@ class Comment(models.Model):
 
 
 class Like(models.Model):
+    """Создаем класс для лайков"""
     owner = models.ForeignKey('user.CustomUser', on_delete=models.CASCADE,
                               related_name='liked_songs')
     sound = models.ForeignKey(Sound, on_delete=models.CASCADE,
@@ -47,6 +51,7 @@ class Like(models.Model):
 
 
 class Favorites(models.Model):
+    """Создаем класс для добавления пользователем продукта в избранные"""
     owner = models.ForeignKey('user.CustomUser', on_delete=models.CASCADE,
                               related_name='favorite_songs')
     sound = models.ForeignKey(Sound, on_delete=models.CASCADE,

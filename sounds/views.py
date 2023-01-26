@@ -12,7 +12,7 @@ from .permissions import IsAuthor, IsAuthorOrAdminOrPostOwner
 
 class SoundViewSet(ModelViewSet):
     queryset = Sound.objects.all()
-
+    """Выполнить/Создать"""
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 

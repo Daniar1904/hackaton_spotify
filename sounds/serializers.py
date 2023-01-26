@@ -2,6 +2,7 @@ from rest_framework import serializers
 from category.models import Genre
 from .models import Sound, Comment, Like
 
+"""Создаем сериализаторы для наших треков"""
 
 class SoundListSerializer(serializers.ModelSerializer):
     owner_email = serializers.ReadOnlyField(source='owner.email')

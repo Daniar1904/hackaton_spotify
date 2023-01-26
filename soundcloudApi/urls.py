@@ -31,6 +31,8 @@ router = SimpleRouter()
 router.register('categories', CategoryViewSet)
 router.register('sounds', SoundViewSet)
 
+"""Делаем схему для swagger"""
+
 schema_view = get_schema_view(
    openapi.Info(
       title="Spotify API",
