@@ -1,5 +1,6 @@
 # from ckeditor.fields import RichTextField
 from django.contrib.auth import get_user_model
+from django.core.validators import FileExtensionValidator
 from django.db import models
 
 from category.models import Genre
@@ -8,11 +9,15 @@ User = get_user_model()
 
 
 class Sound(models.Model):
-
     owner = models.ForeignKey(User, on_delete=models.RESTRICT, related_name='sounds')
     title = models.CharField(max_length=150)
+    file = models.FileField(
+        upload_to='songs',
+        validators=[FileExtensionValidator(allowed_extensions=['mp3', 'wav'])], blank=True
+    )
+    singer = models.CharField(max_length=50, blank=True)
     category = models.ForeignKey(Genre, related_name='sounds', on_delete=models.RESTRICT)
-    image = models.ImageField(upload_to='images')
+    cover = models.ImageField(upload_to='covers', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

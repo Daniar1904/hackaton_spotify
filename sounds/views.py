@@ -60,17 +60,17 @@ class LikeDeleteView(generics.DestroyAPIView):
     permission_classes = (permissions.IsAuthenticated, IsAuthor)
 
 
-class FollowedUsersPostsView(generics.ListAPIView):
-    queryset = Sound.objects.all()
-    serializer_class = serializers.SoundListSerializer
-    permission_classes = (permissions.IsAuthenticated,)
-    pagination_class = StandartResultPagination
-
-    def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
-        followings = request.user.followers.all()
-        users = [user.following for user in followings]
-        res = queryset.filter(owner__in=users)
-        serializer = serializers.SoundListSerializer(
-            instance=res, many=True, context={'request': request})
-        return Response(serializer.data, status=200)
+# class FollowedUsersPostsView(generics.ListAPIView):
+#     queryset = Sound.objects.all()
+#     serializer_class = serializers.SoundListSerializer
+#     permission_classes = (permissions.IsAuthenticated,)
+#     pagination_class = StandartResultPagination
+#
+#     def list(self, request, *args, **kwargs):
+#         queryset = self.get_queryset()
+#         followings = request.user.followers.all()
+#         users = [user.following for user in followings]
+#         res = queryset.filter(owner__in=users)
+#         serializer = serializers.SoundListSerializer(
+#             instance=res, many=True, context={'request': request})
+#         return Response(serializer.data, status=200)

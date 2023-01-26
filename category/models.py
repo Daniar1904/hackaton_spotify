@@ -11,6 +11,7 @@ class Genre(models.Model):
         return self.name
 
 
+
 class Album(models.Model):
     """ Модель альбомов для треков
     """
@@ -36,5 +37,6 @@ class PlayList(models.Model):
         blank=True,
         null=True,
     )
+
 
 
