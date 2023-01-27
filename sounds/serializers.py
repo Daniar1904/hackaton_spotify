@@ -1,6 +1,6 @@
 from rest_framework import serializers
-from category.models import Genre
-from .models import Sound, Comment, Like
+
+from .models import Sound, Comment, Like, Genre
 
 
 class SoundListSerializer(serializers.ModelSerializer):
@@ -25,6 +25,13 @@ class SoundDetailSerializer(serializers.ModelSerializer):
     category_name = serializers.ReadOnlyField(source='category.name')
 
 
+class CategorySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Genre
+        fields = '__all__'
+
+
 class CommentSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.id')
     owner_username = serializers.ReadOnlyField(source='owner.username')
@@ -37,7 +44,7 @@ class CommentSerializer(serializers.ModelSerializer):
 class UsersCommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        fields = ('id', 'body', 'sound', 'created_at')
+        fields = ('id', 'body', 'sounds', 'created_at')
 
     def to_representation(self, instance):
         repr = super().to_representation(instance)
@@ -56,7 +63,7 @@ class LikeSerializer(serializers.ModelSerializer):
     def validate(self, attrs):
         request = self.context['request']
         user = request.user
-        sound = attrs['sound']
+        sound = attrs['sounds']
         if user.liked_songs.filter(sound=sound).exists():
             raise serializers.ValidationError('You already liked this song!')
         return attrs

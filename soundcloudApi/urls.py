@@ -23,9 +23,7 @@ from rest_framework.routers import SimpleRouter
 
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
-from sounds.views import  SoundViewSet
-from category.views import CategoryViewSet
-from sounds.views import SoundViewSet
+from sounds.views import SoundViewSet, CategoryViewSet
 
 router = SimpleRouter()
 router.register('categories', CategoryViewSet)
@@ -35,7 +33,7 @@ schema_view = get_schema_view(
    openapi.Info(
       title="Spotify API",
       default_version='v1',
-      description="Music Streaming Service",
+      description="Music streaming service",
       terms_of_service="https://www.google.com/policies/terms/",
       contact=openapi.Contact(email="contact@snippets.local"),
       license=openapi.License(name="BSD License"),

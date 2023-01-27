@@ -1,5 +1,6 @@
 from django.contrib import admin
 
-from category.models import Genre
+from .models import Album, PlayList
 
-admin.site.register(Genre)
+admin.site.register(Album)
+admin.site.register(PlayList)

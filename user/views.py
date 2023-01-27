@@ -7,6 +7,8 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.pagination import PageNumberPagination
 from rest_framework import generics
+from rest_framework.generics import GenericAPIView
+
 
 from .send_mail import send_confirmation_email
 from . import serializers

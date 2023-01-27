@@ -3,11 +3,25 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from rest_framework import permissions, response, request, generics
 from rest_framework.decorators import action
-
 from user.views import StandartResultPagination
-from .models import Sound, Comment, Like
+from .models import Sound, Comment, Like, Genre
 from . import serializers
 from .permissions import IsAuthor, IsAuthorOrAdminOrPostOwner
+
+from django.shortcuts import render
+from rest_framework import permissions
+from rest_framework.viewsets import ModelViewSet
+
+
+class CategoryViewSet(ModelViewSet):
+    queryset = Genre.objects.all()
+    serializer_class = serializers.CategorySerializer
+
+    def get_permissions(self):
+        if self.action in ('retrieve', 'list'):
+            return [permissions.AllowAny()]
+        else:
+            return [permissions.IsAdminUser()]
 
 
 class SoundViewSet(ModelViewSet):
@@ -35,6 +49,7 @@ class CommentCreateView(generics.CreateAPIView):
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
+
 class CommentDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Comment.objects.all()
     serializer_class = serializers.CommentSerializer
@@ -46,6 +61,7 @@ class CommentDetailView(generics.RetrieveUpdateDestroyAPIView):
             return [permissions.IsAuthenticated(),
                     IsAuthorOrAdminOrPostOwner()]
         return [permissions.AllowAny()]
+
 
 class LikeCreateView(generics.CreateAPIView):
     permission_classes = (permissions.IsAuthenticated,)
@@ -60,17 +76,17 @@ class LikeDeleteView(generics.DestroyAPIView):
     permission_classes = (permissions.IsAuthenticated, IsAuthor)
 
 
-# class FollowedUsersPostsView(generics.ListAPIView):
-#     queryset = Sound.objects.all()
-#     serializer_class = serializers.SoundListSerializer
-#     permission_classes = (permissions.IsAuthenticated,)
-#     pagination_class = StandartResultPagination
-#
-#     def list(self, request, *args, **kwargs):
-#         queryset = self.get_queryset()
-#         followings = request.user.followers.all()
-#         users = [user.following for user in followings]
-#         res = queryset.filter(owner__in=users)
-#         serializer = serializers.SoundListSerializer(
-#             instance=res, many=True, context={'request': request})
-#         return Response(serializer.data, status=200)
+class FollowedUsersSoundsView(generics.ListAPIView):
+    queryset = Sound.objects.all()
+    serializer_class = serializers.SoundListSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+    pagination_class = StandartResultPagination
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        followings = request.user.followers.all()
+        users = [user.following for user in followings]
+        res = queryset.filter(owner__in=users)
+        serializer = serializers.SoundListSerializer(
+            instance=res, many=True, context={'request': request})
+    from django.shortcuts import render
