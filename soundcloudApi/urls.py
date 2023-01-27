@@ -23,9 +23,7 @@ from rest_framework.routers import SimpleRouter
 
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
-from sounds.views import  SoundViewSet
-from category.views import CategoryViewSet
-from sounds.views import SoundViewSet
+from sounds.views import SoundViewSet, CategoryViewSet
 
 router = SimpleRouter()
 router.register('categories', CategoryViewSet)
