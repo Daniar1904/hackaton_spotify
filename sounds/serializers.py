@@ -1,7 +1,10 @@
 from rest_framework import serializers
 
-from .models import Sound, Comment, Like, Genre
+from category.models import Album, PlayList
+from .models import Sound, Comment, Like, Favorite, Genre
 
+
+"""Создаем сериализаторы для наших треков"""
 
 class SoundListSerializer(serializers.ModelSerializer):
     owner_email = serializers.ReadOnlyField(source='owner.email')
@@ -28,42 +31,46 @@ class SoundDetailSerializer(serializers.ModelSerializer):
 class CategorySerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Genre
+        model = Genre, Album, PlayList
         fields = '__all__'
 
 
 class CommentSerializer(serializers.ModelSerializer):
-    owner = serializers.ReadOnlyField(source='owner.id')
-    owner_username = serializers.ReadOnlyField(source='owner.username')
+    owner = serializers.CharField(required=False)
 
     class Meta:
         model = Comment
         fields = '__all__'
 
-
-class UsersCommentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Comment
-        fields = ('id', 'body', 'sounds', 'created_at')
-
     def to_representation(self, instance):
-        repr = super().to_representation(instance)
-        repr['sound_title'] = instance.post.title
-        return repr
+        res = super().to_representation(instance)
+        res['sound'] = instance.sound.title
+        return res
 
 
 class LikeSerializer(serializers.ModelSerializer):
-    owner = serializers.ReadOnlyField(source='owner.id')
-    owner_username = serializers.ReadOnlyField(source='owner.username')
 
     class Meta:
         model = Like
+        fields = ['like', 'sound']
+
+    def to_representation(self, instance):
+        res = super().to_representation(instance)
+        res['sound'] = instance.sound.title
+        if instance.like is True:
+            res['like'] = 'Liked'
+        else:
+            res['like'] = 'Unliked'
+        return res
+
+class FavoriteSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Favorite
         fields = '__all__'
 
-    def validate(self, attrs):
-        request = self.context['request']
-        user = request.user
-        sound = attrs['sounds']
-        if user.liked_songs.filter(sound=sound).exists():
-            raise serializers.ValidationError('You already liked this song!')
-        return attrs
+    def to_representation(self, instance):
+        rep = super().to_representation(instance)
+        rep['owner'] = instance.owner.email
+        rep['sound'] = instance.sound.title
+        return rep

@@ -13,14 +13,16 @@ class Genre(models.Model):
 
 
 class Sound(models.Model):
+    """Подготавливаем модели наших треков"""
     owner = models.ForeignKey(User, on_delete=models.RESTRICT, related_name='sounds')
     title = models.CharField(max_length=150)
+    """В file используем функцию добавления музыкального файла по расширению mp3"""
     file = models.FileField(
         upload_to='songs',
         validators=[FileExtensionValidator(allowed_extensions=['mp3', 'wav'])], blank=True
     )
     singer = models.CharField(max_length=50, blank=True)
-    category = models.ForeignKey(Genre, related_name='sounds', on_delete=models.RESTRICT)
+    # preview = models.ImageField(upload_to='images/', null=True)
     cover = models.ImageField(upload_to='covers', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -29,6 +31,7 @@ class Sound(models.Model):
 
 
 class Comment(models.Model):
+    """Создаем класс для добавления комментариев/отзывов"""
     owner = models.ForeignKey('user.CustomUser', related_name='comments',
                               on_delete=models.CASCADE)
     sound = models.ForeignKey(Sound, related_name='comments',
@@ -41,20 +44,11 @@ class Comment(models.Model):
 
 
 class Like(models.Model):
-    owner = models.ForeignKey('user.CustomUser', on_delete=models.CASCADE,
-                              related_name='liked_songs')
-    sound = models.ForeignKey(Sound, on_delete=models.CASCADE,
-                             related_name='likes')
-
-    class Meta:
-        unique_together = ['owner', 'sound']
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='likes')
+    sound = models.ForeignKey(Sound, on_delete=models.CASCADE, related_name='likes')
+    like = models.BooleanField(default=False)
 
 
-class Favorites(models.Model):
-    owner = models.ForeignKey('user.CustomUser', on_delete=models.CASCADE,
-                              related_name='favorite_songs')
-    sound = models.ForeignKey(Sound, on_delete=models.CASCADE,
-                             related_name='favorites')
-
-    class Meta:
-        unique_together = ['owner', 'sound']
+class Favorite(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='favorites')
+    sound = models.ForeignKey(Sound, on_delete=models.CASCADE, related_name='favorites', null=True, blank=True)

@@ -1,4 +1,3 @@
-
 from django.shortcuts import render
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -18,7 +17,7 @@ logger = logging.getLogger('django_logger')
 
 class SoundViewSet(ModelViewSet):
     queryset = Sound.objects.all()
-
+    """Выполнить/Создать"""
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
@@ -85,3 +84,4 @@ class FavoriteAPIView(mixins.RetrieveModelMixin, mixins.DestroyModelMixin, mixin
         queryset = super().get_queryset()
         queryset = queryset.filter(owner=self.request.user)
         return queryset
+
