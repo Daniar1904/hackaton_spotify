@@ -1,5 +1,8 @@
 from rest_framework import serializers
-from .models import Sound, Comment, Like, Favorite
+
+from category.models import Album, PlayList
+from .models import Sound, Comment, Like, Favorite, Genre
+
 
 """Создаем сериализаторы для наших треков"""
 
@@ -24,6 +27,14 @@ class SoundDetailSerializer(serializers.ModelSerializer):
     owner_username = serializers.ReadOnlyField(source='owner.username')
     category_name = serializers.ReadOnlyField(source='category.name')
 
+
+class CategorySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Genre, Album, PlayList
+        fields = '__all__'
+
+
 class CommentSerializer(serializers.ModelSerializer):
     owner = serializers.CharField(required=False)
 
@@ -35,6 +46,7 @@ class CommentSerializer(serializers.ModelSerializer):
         res = super().to_representation(instance)
         res['sound'] = instance.sound.title
         return res
+
 
 class LikeSerializer(serializers.ModelSerializer):
 

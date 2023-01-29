@@ -84,3 +84,4 @@ class FavoriteAPIView(mixins.RetrieveModelMixin, mixins.DestroyModelMixin, mixin
         queryset = super().get_queryset()
         queryset = queryset.filter(owner=self.request.user)
         return queryset
+

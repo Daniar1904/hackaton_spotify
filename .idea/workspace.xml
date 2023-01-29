@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="943fdda4-fa43-441c-97e8-802d0711c7cb" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/sounds/migrations/0005_rename_favorites_favorite_sound_preview.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sounds/migrations/0006_remove_sound_preview.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sounds/migrations/0007_alter_favorite_unique_together_and_more.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user/decorator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user/file.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user/migrations/0003_delete_follower.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/category/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/category/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/category/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/category/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/category/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/category/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/soundcloudApi/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/soundcloudApi/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sounds/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/sounds/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sounds/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/sounds/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sounds/permissions.py" beforeDir="false" afterPath="$PROJECT_DIR$/sounds/permissions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sounds/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/sounds/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sounds/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/sounds/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sounds/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/sounds/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/parser.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2KapVDyVkrwHQkwwzr6Tbc3QKQh" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/syimyk/Desktop/ev.25/django_projects/shop_api&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="943fdda4-fa43-441c-97e8-802d0711c7cb" name="Changes" comment="" />
+      <created>1674222569764</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1674222569764</updated>
+    </task>
+    <servers />
+  </component>
+</project>
