@@ -1,5 +1,4 @@
 from rest_framework import serializers
-from category.models import Genre
 from .models import Sound, Comment, Like, Favorite
 
 """Создаем сериализаторы для наших треков"""

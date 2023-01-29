@@ -3,7 +3,6 @@ from django.contrib.auth import get_user_model
 from django.core.validators import FileExtensionValidator
 from django.db import models
 
-from category.models import Genre
 
 User = get_user_model()
 
@@ -18,7 +17,6 @@ class Sound(models.Model):
         validators=[FileExtensionValidator(allowed_extensions=['mp3', 'wav'])], blank=True
     )
     singer = models.CharField(max_length=50, blank=True)
-    category = models.ForeignKey(Genre, related_name='sounds', on_delete=models.RESTRICT)
     # preview = models.ImageField(upload_to='images/', null=True)
     cover = models.ImageField(upload_to='covers', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
