@@ -1,7 +1,6 @@
 from bs4 import BeautifulSoup
 from decorator import benchmark
 import requests
-import datetime
 import csv
 
 count = 0

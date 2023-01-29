@@ -19,6 +19,7 @@ class Sound(models.Model):
     )
     singer = models.CharField(max_length=50, blank=True)
     category = models.ForeignKey(Genre, related_name='sounds', on_delete=models.RESTRICT)
+    # preview = models.ImageField(upload_to='images/', null=True)
     cover = models.ImageField(upload_to='covers', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -40,22 +41,11 @@ class Comment(models.Model):
 
 
 class Like(models.Model):
-    """Создаем класс для лайков"""
-    owner = models.ForeignKey('user.CustomUser', on_delete=models.CASCADE,
-                              related_name='liked_songs')
-    sound = models.ForeignKey(Sound, on_delete=models.CASCADE,
-                             related_name='likes')
-
-    class Meta:
-        unique_together = ['owner', 'sound']
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='likes')
+    sound = models.ForeignKey(Sound, on_delete=models.CASCADE, related_name='likes')
+    like = models.BooleanField(default=False)
 
 
-class Favorites(models.Model):
-    """Создаем класс для добавления пользователем продукта в избранные"""
-    owner = models.ForeignKey('user.CustomUser', on_delete=models.CASCADE,
-                              related_name='favorite_songs')
-    sound = models.ForeignKey(Sound, on_delete=models.CASCADE,
-                             related_name='favorites')
-
-    class Meta:
-        unique_together = ['owner', 'sound']
+class Favorite(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='favorites')
+    sound = models.ForeignKey(Sound, on_delete=models.CASCADE, related_name='favorites', null=True, blank=True)

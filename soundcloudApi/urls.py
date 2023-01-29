@@ -19,17 +19,17 @@ from django.urls import path, include, re_path
 from django.conf.urls.static import static
 from django.conf import settings
 from rest_framework import permissions
-from rest_framework.routers import SimpleRouter
+from rest_framework.routers import SimpleRouter, DefaultRouter
 
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
-from sounds.views import  SoundViewSet
+from sounds.views import SoundViewSet
 from category.views import CategoryViewSet
 from sounds.views import SoundViewSet
 
 router = SimpleRouter()
 router.register('categories', CategoryViewSet)
-router.register('sounds', SoundViewSet)
+# router.register('sounds', SoundViewSet)
 
 """Делаем схему для swagger"""
 
@@ -53,7 +53,9 @@ urlpatterns = [
     re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     path('admin/', admin.site.urls),
     path('api/v1/users/', include('user.urls')),
+    path('api/v1/sounds/', include('sounds.urls')),
     path('api/v1/', include(router.urls)),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
