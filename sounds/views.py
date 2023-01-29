@@ -1,27 +1,19 @@
+
 from django.shortcuts import render
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.viewsets import ModelViewSet
+from rest_framework.viewsets import ModelViewSet, mixins, GenericViewSet
 from rest_framework import permissions, response, request, generics
 from rest_framework.decorators import action
-from user.views import StandartResultPagination
-from .models import Sound, Comment, Like, Genre
+import logging
+
+
+from .models import Sound, Comment, Like, Favorite
 from . import serializers
-from .permissions import IsAuthor, IsAuthorOrAdminOrPostOwner
+from .permissions import IsAuthor, IsAuthorOrAdminOrSoundOwner, IsCommentFavouriteOwner
+from .serializers import LikeSerializer, FavoriteSerializer, CommentSerializer
 
-from django.shortcuts import render
-from rest_framework import permissions
-from rest_framework.viewsets import ModelViewSet
-
-
-class CategoryViewSet(ModelViewSet):
-    queryset = Genre.objects.all()
-    serializer_class = serializers.CategorySerializer
-
-    def get_permissions(self):
-        if self.action in ('retrieve', 'list'):
-            return [permissions.AllowAny()]
-        else:
-            return [permissions.IsAdminUser()]
+logger = logging.getLogger('django_logger')
 
 
 class SoundViewSet(ModelViewSet):
@@ -41,52 +33,55 @@ class SoundViewSet(ModelViewSet):
         return [permissions.IsAuthenticatedOrReadOnly()]
 
 
-class CommentCreateView(generics.CreateAPIView):
+class CommentViewSet(ModelViewSet):
+    logger.info('comment')
     queryset = Comment.objects.all()
-    serializer_class = serializers.CommentSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    serializer_class = CommentSerializer
+    permission_classes = [IsCommentFavouriteOwner]
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
+class LikeMixin:
+    @action(detail=True, methods=['POST'])
+    def post(self, request, pk, *args, **kwargs):
+        obj, _ = Like.objects.get_or_create(music_id=pk, owner=request.user)
+        obj.like = not obj.like
+        obj.save()
+        status_ = 'Liked'
+        if not obj.like:
+            status_ = 'Unliked'
+        return Response({'msg': status_})
 
-class CommentDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Comment.objects.all()
-    serializer_class = serializers.CommentSerializer
-
-    def get_permissions(self):
-        if self.request.method in ('PUT', 'PATCH'):
-            return [permissions.IsAuthenticated(), IsAuthor()]
-        elif self.request.method == 'DELETE':
-            return [permissions.IsAuthenticated(),
-                    IsAuthorOrAdminOrPostOwner()]
-        return [permissions.AllowAny()]
-
-
-class LikeCreateView(generics.CreateAPIView):
-    permission_classes = (permissions.IsAuthenticated,)
-    serializer_class = serializers.LikeSerializer
-
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
-
-
-class LikeDeleteView(generics.DestroyAPIView):
+class LikeAPIView(mixins.ListModelMixin, LikeMixin, GenericViewSet):
+    logger.info('like')
     queryset = Like.objects.all()
-    permission_classes = (permissions.IsAuthenticated, IsAuthor)
+    serializer_class = LikeSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(owner=self.request.user)
+        return queryset
 
 
-class FollowedUsersSoundsView(generics.ListAPIView):
-    queryset = Sound.objects.all()
-    serializer_class = serializers.SoundListSerializer
-    permission_classes = (permissions.IsAuthenticated,)
-    pagination_class = StandartResultPagination
+class FavouriteMixin:
+    @action(detail=True, methods=['POST'])
+    def post(self, request, pk, *args, **kwargs):
+        obj, _ = Favorite.objects.get_or_create(music_id=pk, owner=request.user)
+        obj.save()
+        status_ = 'Добавлено'
+        return Response({'msg': status_})
 
-    def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
-        followings = request.user.followers.all()
-        users = [user.following for user in followings]
-        res = queryset.filter(owner__in=users)
-        serializer = serializers.SoundListSerializer(
-            instance=res, many=True, context={'request': request})
-    from django.shortcuts import render
+
+class FavoriteAPIView(mixins.RetrieveModelMixin, mixins.DestroyModelMixin, mixins.ListModelMixin, FavouriteMixin,
+                       GenericViewSet):
+    logger.info('favorite')
+    queryset = Favorite.objects.all()
+    serializer_class = FavoriteSerializer
+    permission_classes = [IsCommentFavouriteOwner]
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(owner=self.request.user)
+        return queryset

@@ -60,13 +60,3 @@ class CustomUser(AbstractUser):
         import uuid
         code = str(uuid.uuid4())
         self.activation_code = code
-
-
-class Follower(models.Model):
-    """ Модель подписчиков
-    """
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='owner')
-    subscriber = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='subscribers')
-
-    def __str__(self):
-        return f'{self.subscriber} подписан на {self.user}'

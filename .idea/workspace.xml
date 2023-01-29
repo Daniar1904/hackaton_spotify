@@ -5,34 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="943fdda4-fa43-441c-97e8-802d0711c7cb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/hackaton_spotify.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/category/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/category/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/category/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/category/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/category/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/category/send_mail.py" beforeDir="false" afterPath="$PROJECT_DIR$/category/send_mail.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/category/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/category/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/category/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/category/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/soundcloudApi/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/soundcloudApi/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/sounds/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/migrations/0002_remove_sound_avail_comment_like_favorites.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/migrations/0003_sound_singer.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/migrations/0004_remove_sound_image_sound_cover_sound_file.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/sounds/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/sounds/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sounds/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/sounds/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sounds/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/sounds/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/data.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/migrations/0002_follower.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/parser.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/send_mail.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/send_mail.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

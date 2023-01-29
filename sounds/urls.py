@@ -1,15 +1,19 @@
+
+
 from django.urls import path, include
 from . import views
-from rest_framework.routers import SimpleRouter
+from rest_framework.routers import SimpleRouter, DefaultRouter
 
-router = SimpleRouter()
-# router.register('sounds', views.SoundViewSet)
+from .views import CommentViewSet, LikeAPIView, FavoriteAPIView
+
+
+"""Прописываем пути нашим атрибутам(комментариям, лайкам, подпискам)"""
+
+router = DefaultRouter()
+router.register('comment', CommentViewSet)
+router.register('like', LikeAPIView)
+router.register('favorite', FavoriteAPIView)
 
 urlpatterns = [
-    # path('', include(router.urls)),
-    path('comments/', views.CommentCreateView.as_view()),
-    path('comments/<int:pk>/', views.CommentDetailView.as_view()),
-    path('likes/', views.LikeCreateView.as_view()),
-    path('likes/<int:pk>/', views.LikeDeleteView.as_view()),
-    path('followings-sounds/', views.FollowedUsersPostsView.as_view()),
+    path('', include(router.urls))
 ]
